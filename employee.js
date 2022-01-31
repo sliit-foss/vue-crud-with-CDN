@@ -1,0 +1,1 @@
+const employee = { template: '<div>Employee</div>' };
