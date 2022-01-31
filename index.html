@@ -14,28 +14,28 @@
     />
   </head>
   <body>
-
-    <div id="id">
-        <h3 class="d-flex container">
-            Vue Js FrontEnd
-        </h3>
-        <h3 class="d-flex container">
-            Employe management portal
-        </h3>
+    <!-- main div element -->
+    <div id="app" class="container">
+      <h1 class="text-center">Employee management portal</h1>
+      <!-- navbar element -->
+      <div class="mt-5 d-flex justify-content-center align-item-center">
+        <div class="button-group">
+          <router-link to="/home" class="btn btn-primary"> Home </router-link>
+          <router-link to="/department" class="btn btn-success">
+            Department
+          </router-link>
+          <router-link to="/employee" class="btn btn-warning">
+            Employee
+          </router-link>
+        </div>
+      </div>
+      <div class="jumbotron containe-fluid">
+        <router-view></router-view>
+      </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-    <script src="https://unpkg.com/vue-router@4.0.5/dist/vue-router.global.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -46,5 +46,9 @@
       integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
       crossorigin="anonymous"
     ></script>
+    <script src="home.js"></script>
+    <script src="department.js"></script>
+    <script src="employee.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

@@ -1,1 +1,1 @@
-const department = {template: '<div>Department</div>'};
+const Department = { template: `<div>Department</div>` };
