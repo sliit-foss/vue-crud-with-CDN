@@ -12,28 +12,28 @@ const customer = {
                     <form>
                         <div class="row">
                             <div class="col-lg col-sm-12 mb-2 mb-lg-0">
-                                <input type="text" class="form-control" placeholder="Customer ID">
+                                <input v-model="customerID" type="text" class="form-control" placeholder="Customer ID">
                             </div>
                         </div>
                         <div class="row mt-2">
                             <div class="col-lg col-sm-12 mb-2 mb-lg-0">
-                                <input type="text" class="form-control" placeholder="First name">
+                                <input v-model="firstName" type="text" class="form-control" placeholder="First name">
                             </div>
                             <div class="col-lg col-sm-12">
-                                <input type="text" class="form-control" placeholder="Last name">
+                                <input v-model="lastName" type="text" class="form-control" placeholder="Last name">
                             </div>
                         </div>
                         <div class="row mt-2">
                             <div class="col-lg col-sm-12 mb-2 mb-lg-0">
-                                <input type="text" class="form-control" placeholder="Mobile Number">
+                                <input v-model="mobileNumber" type="text" class="form-control" placeholder="Mobile Number">
                             </div>
                             <div class="col-lg col-sm-12">
-                                <textarea class="form-control" placeholder="Address"></textarea>
+                                <textarea v-model="address" class="form-control" placeholder="Address"></textarea>
                             </div>
                         </div>
                         <div class="row mt-2">
                             <div class="col-lg col-sm-12">
-                                <input class="btn btn-success col" value="register">
+                                <input class="btn btn-success col" value="register" @click="submitForm">
                             </div>
                         </div>
                     </form>
@@ -98,6 +98,16 @@ const customer = {
     };
   },
   methods: {
-    submitForm() {},
+    submitForm() {
+      const customer = {
+        customerID: this.customerID,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        mobileNumber: this.mobileNumber,
+        address: this.address,
+      };
+
+      this.customerDetails.push(customer);
+    },
   },
 };
