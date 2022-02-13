@@ -28,12 +28,12 @@ const customer = {
                                 <input type="text" class="form-control" placeholder="Mobile Number">
                             </div>
                             <div class="col-lg col-sm-12">
-                                <textarea type="text" class="form-control" placeholder="Address"></textarea>
+                                <textarea class="form-control" placeholder="Address"></textarea>
                             </div>
                         </div>
                         <div class="row mt-2">
                             <div class="col-lg col-sm-12">
-                                <input type="button" class="btn btn-success col" value="register">
+                                <input class="btn btn-success col" value="register">
                             </div>
                         </div>
                     </form>
@@ -55,12 +55,13 @@ const customer = {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">Madhusha Prasad</th>
-                        <td>Madhusha</td>
-                        <td>Prasad</td>
-                        <td>0947148745</td>
-                        <td>Kalutara South,Sri Lanka</td>
+                    <tr v-for="(customer,index) in customerDetails" :key="index">
+                        <th scope="row">{{customer.customerID}}</th>
+                        <td>{{customer.customerID}}</td>
+                        <td>{{customer.firstName}}</td>
+                        <td>{{customer.lastName}}</td>
+                        <td>{{customer.mobileNumber}}</td>
+                        <td>{{customer.address}}</td>
                         <td><i class="fa fa-trash text-danger"></i> &nbsp &nbsp <i class="fa fa-pencil-square-o text-primary"></i></td>
                     </tr>
                 </tbody>
@@ -68,4 +69,35 @@ const customer = {
             </div>
         </div>
     `,
+
+  data() {
+    return {
+      customerID: '',
+      firstName: '',
+      lastName: '',
+      mobileNumber: '',
+      address: '',
+      customerDetails: [
+        {
+          customerID: 'CM001',
+          firstName: 'Madhusha',
+          lastName: 'Prasad',
+          mobileNumber: '0947148745',
+          address: 'Kalutara South,Sri Lanka',
+        },
+        {
+          customerID: 'CM001',
+          firstName: 'Madhusha',
+          lastName: 'Prasad',
+          mobileNumber: '0947148745',
+          address: 'Kalutara South,Sri Lanka',
+        },
+      ],
+      loading: false,
+      submit: false,
+    };
+  },
+  methods: {
+    submitForm() {},
+  },
 };
