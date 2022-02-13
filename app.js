@@ -1,13 +1,15 @@
 const routes = [
-  { path: '/home', component: Home },
-  { path: '/employee', component: Employee },
-  { path: '/department', component: Department },
+  { path: '/', component: home },
+  { path: '/customer', component: customer },
+  { path: '/item', component: item },
 ];
 
-const router = new VueRouter({
-  routes,
+const router = VueRouter.createRouter({
+  // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
+  history: VueRouter.createWebHashHistory(),
+  routes, // short for `routes: routes`
 });
 
-const app = new Vue({
-  router,
-}).$mount('#app');
+const app = Vue.createApp({});
+app.use(router);
+app.mount('#app');
