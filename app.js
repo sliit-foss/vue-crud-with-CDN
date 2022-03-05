@@ -2,6 +2,7 @@ const routes = [
   { path: '/', component: home },
   { path: '/customer', component: customer },
   { path: '/item', component: item },
+  { path: '/test', component: test },
 ];
 
 const router = VueRouter.createRouter({
