@@ -9,7 +9,7 @@ const customer = {
             <!-- Start customer form section -->
             <div className="col-12 d-flex justify-content-center align-item-center">
                 <div className="col-6">
-                    <form>
+                    <form id="customerForm">
                         <div class="row">
                             <div class="col-lg col-sm-12 mb-2 mb-lg-0">
                                 <input v-model="customerID" type="text" class="form-control" placeholder="Customer ID">
@@ -108,6 +108,15 @@ const customer = {
       };
 
       this.customerDetails.push(customer);
+      this.clearCustomerForm();
     },
+
+    clearCustomerForm() {
+        this.customerID = this.customerID,
+        this.firstName = this.firstName,
+        this.lastName = this.lastName,
+        this.mobileNumber = this.mobileNumber,
+        this.address = this.address,
+    }
   },
 };
