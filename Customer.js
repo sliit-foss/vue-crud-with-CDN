@@ -112,11 +112,11 @@ const customer = {
     },
 
     clearCustomerForm() {
-        this.customerID = this.customerID,
-        this.firstName = this.firstName,
-        this.lastName = this.lastName,
-        this.mobileNumber = this.mobileNumber,
-        this.address = this.address,
-    }
+      this.customerID = this.customerID;
+      this.firstName = this.firstName;
+      this.lastName = this.lastName;
+      this.mobileNumber = this.mobileNumber;
+      this.address = this.address;
+    },
   },
 };
