@@ -121,11 +121,11 @@ const customer = {
 
     //clear customer form
     clearCustomerForm() {
-      this.customerID = this.customerID;
-      this.firstName = this.firstName;
-      this.lastName = this.lastName;
-      this.mobileNumber = this.mobileNumber;
-      this.address = this.address;
+      this.customerID = '';
+      this.firstName = '';
+      this.lastName = '';
+      this.mobileNumber = '';
+      this.address = '';
     },
 
     //edit customer
@@ -147,7 +147,7 @@ const customer = {
     },
 
     //update customer
-    updateButton() {
+    updateCustomer() {
       const customer = {
         customerID: this.customerID,
         firstName: this.firstName,
@@ -158,6 +158,7 @@ const customer = {
 
       this.customerDetails[this.selectedCustomerRowID] = customer;
       this.clearCustomerForm();
+      this.clickEditButton = false;
     },
 
     //delete customer
