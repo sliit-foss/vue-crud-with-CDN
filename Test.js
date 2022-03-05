@@ -3,7 +3,7 @@ const test = {
     <div>
         <h1 v-if="message.length > 3">{{message}}</h1>
         <input v-model="myName" placeholder="Enter your Name">
-        <button @click="showAlerFunction" class="btn btn-success">Show Aler</button>
+        <button @click="showAlerFunction" class="btn btn-success ml-3">Show Aler</button>
 
         <h1>{{myName}}</h1>
     </div>

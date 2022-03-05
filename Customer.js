@@ -9,7 +9,7 @@ const customer = {
             <!-- Start customer form section -->
             <div className="col-12 d-flex justify-content-center align-item-center">
                 <div className="col-6">
-                    <form>
+                    <form id="customerForm">
                         <div class="row">
                             <div class="col-lg col-sm-12 mb-2 mb-lg-0">
                                 <input v-model="customerID" type="text" class="form-control" placeholder="Customer ID">
@@ -33,7 +33,7 @@ const customer = {
                         </div>
                         <div class="row mt-2">
                             <div class="col-lg col-sm-12">
-                                <input class="btn btn-success col" value="register" @click="submitForm">
+                                <input :class="clickEditButton ? 'btn btn-primary col' : 'btn btn-success col'" :value="clickEditButton ? 'Update Customer':'Register'" @click="submitForm">
                             </div>
                         </div>
                     </form>
@@ -57,12 +57,12 @@ const customer = {
                 <tbody>
                     <tr v-for="(customer,index) in customerDetails" :key="index">
                         <th scope="row">{{customer.customerID}}</th>
-                        <td>{{customer.customerID}}</td>
                         <td>{{customer.firstName}}</td>
                         <td>{{customer.lastName}}</td>
                         <td>{{customer.mobileNumber}}</td>
                         <td>{{customer.address}}</td>
-                        <td><i class="fa fa-trash text-danger"></i> &nbsp &nbsp <i class="fa fa-pencil-square-o text-primary"></i></td>
+                        <td><i class="fa fa-trash text-danger btn" @click="deleteCustomer(index)"></i> &nbsp &nbsp 
+                        <i class="fa fa-pencil-square-o text-primary btn" @click="editCustomer(index)"></i></td>
                     </tr>
                 </tbody>
             </table>
@@ -95,10 +95,59 @@ const customer = {
       ],
       loading: false,
       submit: false,
+      clickEditButton: false,
+      selectedCustomerRowID: null,
     };
   },
   methods: {
+    //submit customer form
     submitForm() {
+      //check if the customer click the edit button
+      if (this.clickEditButton) {
+        this.updateCustomer();
+      } else {
+        const customer = {
+          customerID: this.customerID,
+          firstName: this.firstName,
+          lastName: this.lastName,
+          mobileNumber: this.mobileNumber,
+          address: this.address,
+        };
+
+        this.customerDetails.push(customer);
+        this.clearCustomerForm();
+      }
+    },
+
+    //clear customer form
+    clearCustomerForm() {
+      this.customerID = '';
+      this.firstName = '';
+      this.lastName = '';
+      this.mobileNumber = '';
+      this.address = '';
+    },
+
+    //edit customer
+    editCustomer(customerID) {
+      if (
+        customerID !== '' ||
+        customerID !== undefined ||
+        customerID !== null
+      ) {
+        const selectedCustomer = this.customerDetails[customerID];
+        this.customerID = selectedCustomer.customerID;
+        this.firstName = selectedCustomer.firstName;
+        this.lastName = selectedCustomer.lastName;
+        this.mobileNumber = selectedCustomer.mobileNumber;
+        this.address = selectedCustomer.address;
+        this.clickEditButton = true;
+        this.selectedCustomerRowID = customerID;
+      }
+    },
+
+    //update customer
+    updateCustomer() {
       const customer = {
         customerID: this.customerID,
         firstName: this.firstName,
@@ -107,7 +156,15 @@ const customer = {
         address: this.address,
       };
 
-      this.customerDetails.push(customer);
+      this.customerDetails[this.selectedCustomerRowID] = customer;
+      this.clearCustomerForm();
+      this.clickEditButton = false;
+    },
+
+    //delete customer
+    deleteCustomer(customerID) {
+      //remove selected customer from the array
+      this.customerDetails.splice(customerID, 1);
     },
   },
 };
