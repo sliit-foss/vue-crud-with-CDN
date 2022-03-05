@@ -62,7 +62,8 @@ const customer = {
                         <td>{{customer.lastName}}</td>
                         <td>{{customer.mobileNumber}}</td>
                         <td>{{customer.address}}</td>
-                        <td><i class="fa fa-trash text-danger"></i> &nbsp &nbsp <i class="fa fa-pencil-square-o text-primary"></i></td>
+                        <td><i class="fa fa-trash text-danger"></i> &nbsp &nbsp 
+                        <i class="fa fa-pencil-square-o text-primary" @click="editCustomer(index)"></i></td>
                     </tr>
                 </tbody>
             </table>
@@ -117,6 +118,21 @@ const customer = {
       this.lastName = this.lastName;
       this.mobileNumber = this.mobileNumber;
       this.address = this.address;
+    },
+
+    editCustomer(customerID) {
+      if (
+        customerID !== '' ||
+        customerID !== undefined ||
+        customerID !== null
+      ) {
+        const selectedCustomer = this.customerDetails[customerID];
+        this.customerID = selectedCustomer.customerID;
+        this.firstName = selectedCustomer.firstName;
+        this.lastName = selectedCustomer.lastName;
+        this.mobileNumber = selectedCustomer.mobileNumber;
+        this.address = selectedCustomer.address;
+      }
     },
   },
 };
