@@ -9,7 +9,7 @@ const customer = {
             <!-- Start customer form section -->
             <div className="col-12 d-flex justify-content-center align-item-center">
                 <div className="col-6">
-                    <form>
+                    <form id="customerForm">
                         <div class="row">
                             <div class="col-lg col-sm-12 mb-2 mb-lg-0">
                                 <input v-model="customerID" type="text" class="form-control" placeholder="Customer ID">
@@ -62,7 +62,8 @@ const customer = {
                         <td>{{customer.lastName}}</td>
                         <td>{{customer.mobileNumber}}</td>
                         <td>{{customer.address}}</td>
-                        <td><i class="fa fa-trash text-danger"></i> &nbsp &nbsp <i class="fa fa-pencil-square-o text-primary"></i></td>
+                        <td><i class="fa fa-trash text-danger"></i> &nbsp &nbsp 
+                        <i class="fa fa-pencil-square-o text-primary" @click="editCustomer(index)"></i></td>
                     </tr>
                 </tbody>
             </table>
@@ -108,6 +109,30 @@ const customer = {
       };
 
       this.customerDetails.push(customer);
+      this.clearCustomerForm();
+    },
+
+    clearCustomerForm() {
+      this.customerID = this.customerID;
+      this.firstName = this.firstName;
+      this.lastName = this.lastName;
+      this.mobileNumber = this.mobileNumber;
+      this.address = this.address;
+    },
+
+    editCustomer(customerID) {
+      if (
+        customerID !== '' ||
+        customerID !== undefined ||
+        customerID !== null
+      ) {
+        const selectedCustomer = this.customerDetails[customerID];
+        this.customerID = selectedCustomer.customerID;
+        this.firstName = selectedCustomer.firstName;
+        this.lastName = selectedCustomer.lastName;
+        this.mobileNumber = selectedCustomer.mobileNumber;
+        this.address = selectedCustomer.address;
+      }
     },
   },
 };
