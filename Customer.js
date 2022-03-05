@@ -61,8 +61,8 @@ const customer = {
                         <td>{{customer.lastName}}</td>
                         <td>{{customer.mobileNumber}}</td>
                         <td>{{customer.address}}</td>
-                        <td><i class="fa fa-trash text-danger"></i> &nbsp &nbsp 
-                        <i class="fa fa-pencil-square-o text-primary" @click="editCustomer(index)"></i></td>
+                        <td><i class="fa fa-trash text-danger btn" @click="deleteCustomer(index)"></i> &nbsp &nbsp 
+                        <i class="fa fa-pencil-square-o text-primary btn" @click="editCustomer(index)"></i></td>
                     </tr>
                 </tbody>
             </table>
@@ -104,7 +104,7 @@ const customer = {
     submitForm() {
       //check if the customer click the edit button
       if (this.clickEditButton) {
-        this.updateButton();
+        this.updateCustomer();
       } else {
         const customer = {
           customerID: this.customerID,
@@ -158,6 +158,12 @@ const customer = {
 
       this.customerDetails[this.selectedCustomerRowID] = customer;
       this.clearCustomerForm();
+    },
+
+    //delete customer
+    deleteCustomer(customerID) {
+      //remove selected customer from the array
+      this.customerDetails.splice(customerID, 1);
     },
   },
 };
