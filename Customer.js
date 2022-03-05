@@ -33,7 +33,7 @@ const customer = {
                         </div>
                         <div class="row mt-2">
                             <div class="col-lg col-sm-12">
-                                <input class="btn btn-success col" value="register" @click="submitForm">
+                                <input :class="clickEditButton ? 'btn btn-primary col' : 'btn btn-success col'" :value="clickEditButton ? 'Update Customer':'Register'" @click="submitForm">
                             </div>
                         </div>
                     </form>
@@ -57,13 +57,12 @@ const customer = {
                 <tbody>
                     <tr v-for="(customer,index) in customerDetails" :key="index">
                         <th scope="row">{{customer.customerID}}</th>
-                        <td>{{customer.customerID}}</td>
                         <td>{{customer.firstName}}</td>
                         <td>{{customer.lastName}}</td>
                         <td>{{customer.mobileNumber}}</td>
                         <td>{{customer.address}}</td>
-                        <td><i class="fa fa-trash text-danger"></i> &nbsp &nbsp 
-                        <i class="fa fa-pencil-square-o text-primary" @click="editCustomer(index)"></i></td>
+                        <td><i class="fa fa-trash text-danger btn" @click="deleteCustomer(index)"></i> &nbsp &nbsp 
+                        <i class="fa fa-pencil-square-o text-primary btn" @click="editCustomer(index)"></i></td>
                     </tr>
                 </tbody>
             </table>
@@ -96,22 +95,31 @@ const customer = {
       ],
       loading: false,
       submit: false,
+      clickEditButton: false,
+      selectedCustomerRowID: null,
     };
   },
   methods: {
+    //submit customer form
     submitForm() {
-      const customer = {
-        customerID: this.customerID,
-        firstName: this.firstName,
-        lastName: this.lastName,
-        mobileNumber: this.mobileNumber,
-        address: this.address,
-      };
+      //check if the customer click the edit button
+      if (this.clickEditButton) {
+        this.updateCustomer();
+      } else {
+        const customer = {
+          customerID: this.customerID,
+          firstName: this.firstName,
+          lastName: this.lastName,
+          mobileNumber: this.mobileNumber,
+          address: this.address,
+        };
 
-      this.customerDetails.push(customer);
-      this.clearCustomerForm();
+        this.customerDetails.push(customer);
+        this.clearCustomerForm();
+      }
     },
 
+    //clear customer form
     clearCustomerForm() {
       this.customerID = this.customerID;
       this.firstName = this.firstName;
@@ -120,6 +128,7 @@ const customer = {
       this.address = this.address;
     },
 
+    //edit customer
     editCustomer(customerID) {
       if (
         customerID !== '' ||
@@ -132,7 +141,29 @@ const customer = {
         this.lastName = selectedCustomer.lastName;
         this.mobileNumber = selectedCustomer.mobileNumber;
         this.address = selectedCustomer.address;
+        this.clickEditButton = true;
+        this.selectedCustomerRowID = customerID;
       }
+    },
+
+    //update customer
+    updateButton() {
+      const customer = {
+        customerID: this.customerID,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        mobileNumber: this.mobileNumber,
+        address: this.address,
+      };
+
+      this.customerDetails[this.selectedCustomerRowID] = customer;
+      this.clearCustomerForm();
+    },
+
+    //delete customer
+    deleteCustomer(customerID) {
+      //remove selected customer from the array
+      this.customerDetails.splice(customerID, 1);
     },
   },
 };
